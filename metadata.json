@@ -1,0 +1,23 @@
+{
+  "name": "solict-fhs_app_vcs",
+  "version": "0.1.0",
+  "author": "Luís Pedro Algarvio <lp.algarvio@gmail.com>",
+  "summary": " Puppet module that manages repos and vhosts in FHS /app. Requires solict-fhs_app.",
+  "license": "GPL-2.0",
+  "source": "https://github.com/solict/puppet-module-fhs-app-vcs",
+  "project_page": "https://github.com/solict/puppet-module-fhs-app-vcs",
+  "issues_url": "https://github.com/solict/puppet-module-fhs-app-vcs/issues",
+  "dependencies": [
+    {
+      "name":"puppetlabs-stdlib","version_requirement":">= 1.0.0",
+      "name":"solict-fhs_app","version_requirement":">= 1.0.0"
+    }
+  ],
+  "tags": [
+    "FHS",
+    "app",
+    "application",
+    "user",
+    "vcs"
+  ]
+}
