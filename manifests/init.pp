@@ -1,48 +1,55 @@
 # Class: fhs_app_vcs
 # ===========================
 #
-# Full description of class fhs_app_vcs here.
+# Initializes the module, loading the necessary dependencies and classes.
 #
 # Parameters
 # ----------
 #
-# Document parameters here.
+# The following parameters are used:
 #
-# * `sample parameter`
-# Explanation of what this parameter affects and what it defaults to.
-# e.g. "Specify one or more upstream ntp servers as an array."
+# ...
+#
+# More information can be found on HOWTO.md.
 #
 # Variables
 # ----------
 #
-# Here you should define a list of variables that this module would require.
-#
-# * `sample variable`
-#  Explanation of how this variable affects the function of this class and if
-#  it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#  External Node Classifier as a comma separated list of hostnames." (Note,
-#  global variables should be avoided in favor of class parameters as
-#  of Puppet 2.6.)
+# There are no variables being used.
 #
 # Examples
 # --------
 #
-# @example
-#    class { 'fhs_app_vcs':
-#      servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
-#    }
+# ...
+#
+# More information can be found on HOWTO.md.
 #
 # Authors
 # -------
 #
-# Author Name <author@domain.com>
+# Luís Pedro Algarvio <lp.algarvio@gmail.com>
 #
 # Copyright
 # ---------
 #
-# Copyright 2015 Your name here, unless otherwise noted.
+# Copyright 2015 SOL-ICT.
 #
-class fhs_app_vcs {
+class fhs_app_vcs (
 
+  # Hashes
+  $defaults                  = $fhs_app_vcs::params::defaults,
+  $childs                    = $fhs_app_vcs::params::childs,
+
+) inherits fhs_app_vcs::params {
+
+  # Include dependencies
+  include stdlib
+
+  # Autoload module classes
+  anchor { 'fhs_app_vcs::begin': } ->
+    # Load Childs class
+    class { '::fhs_app_vcs::childs': } ->
+  anchor { 'fhs_app_vcs::end': }
 
 }
+
