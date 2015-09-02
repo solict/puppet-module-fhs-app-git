@@ -17,6 +17,13 @@ class fhs_app_vcs::params {
 
   # Defaults hash
   $defaults = {
+    vcs => {
+      repos => {
+        ensure     => 'present',
+        revision   => 'master',
+        submodules => true,
+      },
+    },
   }
 
 }

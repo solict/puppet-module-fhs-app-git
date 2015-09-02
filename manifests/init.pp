@@ -37,18 +37,19 @@
 class fhs_app_vcs (
 
   # Hashes
-  $defaults                  = $fhs_app_vcs::params::defaults,
-  $childs                    = $fhs_app_vcs::params::childs,
+  $defaults = $fhs_app_vcs::params::defaults,
+  $vcs      = $fhs_app_vcs::params::vcs,
 
 ) inherits fhs_app_vcs::params {
 
   # Include dependencies
   include stdlib
+  include fhs_app
 
   # Autoload module classes
   anchor { 'fhs_app_vcs::begin': } ->
-    # Load Childs class
-    class { '::fhs_app_vcs::childs': } ->
+    # Load VCS class
+    class { '::fhs_app_vcs::vcs': } ->
   anchor { 'fhs_app_vcs::end': }
 
 }
