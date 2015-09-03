@@ -8,7 +8,13 @@
 #
 # The following parameters are used:
 #
-# ...
+# * `vcs`
+# A hash that defines the parameters for the vcs class.
+# These will be used to clone/pull repositories and apply permissions and
+# ownership to files.
+# Repositories and locations are customizable.
+# If no vcs params are provided, no changes will be made.
+# Multiple vcs repos can be provided.
 #
 # More information can be found on HOWTO.md.
 #
@@ -20,7 +26,10 @@
 # Examples
 # --------
 #
-# ...
+# @example
+#    class { 'fhs_app_vcs':
+#      vcs => {(...)},
+#    }
 #
 # More information can be found on HOWTO.md.
 #

@@ -1,7 +1,10 @@
 # Class: fhs_app_vcs::vcs
 # ===========================
 #
-# ...
+# Manages the repositories and applies permissions and ownership to files,
+# using the vcs params provided to init.pp.
+# If no parameters are provided, no changes are made.
+# Multiple vcs repos can be provided.
 #
 # Authors
 # -------

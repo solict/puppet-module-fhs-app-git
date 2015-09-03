@@ -1,4 +1,5 @@
 The module can be configured with either declarations in a manifest or parameters in hiera.
+The defaults hash can be safely ignored.
 
 ### Manifest example
 

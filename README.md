@@ -4,76 +4,101 @@
 
 1. [Overview](#overview)
 2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with fhs_app_vcs](#setup)
-    * [What fhs_app_vcs affects](#what-fhs_app_vcs-affects)
+3. [Setup - The basics of getting started with the module](#setup)
+    * [What the module_affects](#what-the-module-affects)
     * [Setup requirements](#setup-requirements)
-    * [Beginning with fhs_app_vcs](#beginning-with-fhs_app_vcs)
+    * [Beginning with the module](#beginning-with-the-module)
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
 6. [Development - Guide for contributing to the module](#development)
+7. [Release Notes - Other notable remarks](#release-notes)
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
+Puppet module that manages repositories in FHS /app.
+Designed for Puppet 3.x and newer in POSIX environments.
+Requires solict-fhs_app >= 2.0.0.
 
 ## Module Description
 
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
+The module will implement and manage code repositories in FHS /app, reusing the
+configuration defined in solict-fhs_app, including applications.
 
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
+Git and Mercurial (Hg) repositories are supported.
+
+Consult solict-fhs_app for more information regarding this FHS and
+puppetlabs-vcsrepo for information regarding vcsrepo type.
+
+This module has been desgined for Puppet 3.x and newer in POSIX environments.
+Requires solict-fhs_app >= 2.0.0.
 
 ## Setup
 
 ### What fhs_app_vcs affects
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
+* Repositories will be cloned/pulled to the application src directory.
+* Permissions and ownership will be applied where applicable.
 
-### Setup Requirements **OPTIONAL**
+### Setup Requirements
 
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
+The following modules are requirements and should be installed.
+* puppetlabs-stdlib
+* puppetlabs-vcsrepo
+* solict-fhs_app >= 2.0.0
 
-### Beginning with fhs_app_vcs
+### Beginning with the module
 
-The very basic steps needed for a user to get the module up and running.
+When deployed, the directory of the module should be renamed to fhs_app_vcs.
 
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+The class fhs_app_vcs must be declared in a manifest or loaded with
+hiera_include to be initialized.
+All other classes are autoloaded and do not need to be manually initialized.
+
+Parameters can be provided with both methods, for the class fhs_app_vcs.
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+The following parameters are used:
+
+* `defaults`
+A hash that defines the default parameters.
+It is hard coded into params.pp and can be ignored.
+They are used when the other hashes are missing or incomplete.
+
+* `vcs`
+A hash that defines the parameters for the vcs class.
+These will be used to clone/pull repositories and apply permissions and
+ownership to files.
+Repositories and locations are customizable.
+If no vcs params are provided, no changes will be made.
+Multiple vcs repos can be provided.
+
+The file HOWTO.md details sample usage with manifests and hiera.
 
 ## Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+There are 3 classes provided by this module:
+- fhs_app, which initializes the module are accepts parameters
+- fhs_app::params, which is autoloaded to retrieve parameters
+- fhs_app::childs, which is autoloaded to manage the provided repositories
+
+The parameterized vcsrepo and file resources are managed as configured, as
+defined for params vcs.
+
+No new resources are provided.
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+It has been successfully tested in CentOS/RHEL and Debian.
+Should be compatible with most of the Linux distributions.
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
+The source for the module can be found on it's project source page.
+Contributions and issues are welcomed.
 
-## Release Notes/Contributors/Etc **Optional**
+## Release Notes
 
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.
+This source code comes with absolutely no warranty or liability for damages.
+
